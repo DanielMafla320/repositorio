@@ -207,7 +207,7 @@ export default function App() {
             innovadoras. Me motiva entender a fondo cómo funcionan los sistemas y enfrentar desafíos que me permitan
             crecer constantemente como desarrollador, creando software con impacto real.
             </p>
-            <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6868a0', marginBottom: 32 }}>Soy una persona sociable, disfruto conocer gente y trabajar en equipo. Además, me interesa la edición de video y el contenido digital, lo que complementa mi perfil con un enfoque creativo</p>
+            <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6868a0', marginBottom: 32 }}>Me caracterizo por ser una persona sociable y colaborativa, con facilidad para el trabajo en equipo. También tengo afinidad por la edición de video y la creación de contenido digital, lo que aporta un enfoque creativo a mi perfil como desarrollador.</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               {[
                 { title: 'Lenguajes', skills: ['Python', 'Java', 'JavaScript' ,'HTML5', 'CSS3'] },
