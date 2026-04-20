@@ -17,6 +17,26 @@ import { FaGithub, FaLinkedin,  } from "react-icons/fa";
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('inicio');
   const [text, setText] = useState("");
+  const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+  
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+  
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+  
+    const rotateX = -(y - centerY) / 12;
+    const rotateY = (x - centerX) / 12;
+  
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+  };
+  
+  const resetTilt = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+  };
   useEffect(() => {
     const words = [
       "Software Engineering Student",
@@ -283,7 +303,8 @@ export default function App() {
               { text: 'Trabajar con Daniel fue una experiencia muy positiva. Su entusiasmo por la tecnología y su compromiso con cada tarea hacen que los proyectos siempre salgan adelante.', name: 'Carlos Ruiz', role: 'Compañero de proyecto universitario', avatar: 'https://images.unsplash.com/photo-1723537742563-15c3d351dbf2?w=100&q=80' },
               { text: 'Daniel tiene una gran curiosidad intelectual y siempre está buscando nuevas formas de mejorar. Es el tipo de estudiante que marca la diferencia en un equipo.', name: 'Laura Fernández', role: 'Mentora de desarrollo web', avatar: 'https://images.unsplash.com/photo-1610387694365-19fafcc86d86?w=100&q=80' },
             ].map((t, i) => (
-              <div key={i}   className={`testimonial-card glass reveal reveal-d${i + 1}`}
+              <div key={i}   className={`testimonial-card glass reveal reveal-d${i + 1}`} onMouseMove={(e) => handleTilt(e)} onMouseLeave={(e) => resetTilt(e)}
+            
               style={{
                 borderRadius: 20,
                 padding: 28,
