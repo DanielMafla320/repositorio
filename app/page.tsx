@@ -203,9 +203,9 @@ export default function App() {
               Acerca <br />de <span className="grad-subtle">mí</span>
             </h2>
             <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6868a0', marginBottom: 14 }}>
-              Soy estudiante de Ingeniería de Software con una gran curiosidad por aprender y explorar 
-              nuevas áreas de la tecnología. Me apasiona entender cómo funcionan las cosas por dentro 
-              y encontrar formas creativas de resolver problemas a través del código.
+            Soy estudiante de Ingeniería de Software apasionado por la tecnología y el desarrollo de soluciones
+            innovadoras. Me motiva entender a fondo cómo funcionan los sistemas y enfrentar desafíos que me permitan
+            crecer constantemente como desarrollador, creando software con impacto real.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6868a0', marginBottom: 32 }}>Soy una persona sociable, disfruto conocer gente y trabajar en equipo. Además, me interesa la edición de video y el contenido digital, lo que complementa mi perfil con un enfoque creativo</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
@@ -243,7 +243,7 @@ export default function App() {
               { img: '/reproductor xsound.png', title: 'XSOUND', desc: 'Reproductor de musica de manera local o online', tags: ['Typescript',"CSS"], cta: 'Ver proyecto' },
               { img: 'https://images.unsplash.com/photo-1661246627162-feb0269e0c07?w=600&q=80', title: 'Saborify', desc: 'Aplicación que te ayuda a cocinar y te recomienda recetas dependiendo tus necesidades', tags: ['TypeScript', 'Css'], cta: 'Ver proyecto' },
             ].map((p, i) => (
-              <div key={i} className={`proj-card reveal reveal-d${i + 1}`}>
+              <div key={i} className={`proj-card glass reveal reveal-d${i + 1}`}>
                 <div className="proj-card-img">
                   <img src={p.img} alt={p.title} />
                   <div className="proj-card-overlay">
@@ -283,7 +283,13 @@ export default function App() {
               { text: 'Trabajar con Daniel fue una experiencia muy positiva. Su entusiasmo por la tecnología y su compromiso con cada tarea hacen que los proyectos siempre salgan adelante.', name: 'Carlos Ruiz', role: 'Compañero de proyecto universitario', avatar: 'https://images.unsplash.com/photo-1723537742563-15c3d351dbf2?w=100&q=80' },
               { text: 'Daniel tiene una gran curiosidad intelectual y siempre está buscando nuevas formas de mejorar. Es el tipo de estudiante que marca la diferencia en un equipo.', name: 'Laura Fernández', role: 'Mentora de desarrollo web', avatar: 'https://images.unsplash.com/photo-1610387694365-19fafcc86d86?w=100&q=80' },
             ].map((t, i) => (
-              <div key={i} className={`reveal reveal-d${i + 1}`} style={{ background: '#ffffff', border: '1.5px solid #e8e4fc', borderRadius: 20, padding: 28, position: 'relative', overflow: 'hidden', boxShadow: '0 2px 16px #7c3aed08' }}>
+              <div key={i}   className={`testimonial-card glass reveal reveal-d${i + 1}`}
+              style={{
+                borderRadius: 20,
+                padding: 28,
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
                 <div className="testi-quote">"</div>
                 <div style={{ display: 'flex', gap: 3, marginBottom: 16 }}>
                   {[...Array(5)].map((_, j) => <span key={j} style={{ color: '#a855f7', fontSize: 14 }}>★</span>)}
