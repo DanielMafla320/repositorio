@@ -9,7 +9,7 @@ import {
   Send,
 } from 'lucide-react';
  
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaGithub, FaLinkedin,  } from "react-icons/fa";
  
  
  
@@ -400,9 +400,6 @@ export default function App() {
                   <a href="https://www.linkedin.com/in/daniel-mafla-782541317/?skipRedirect=true" target="_blank" rel="noopener noreferrer">
                     <div className="social-btn"><FaLinkedin size={20} /></div>
                   </a>
-                  <a href="https://www.instagram.com/daniel_mafla05/?hl=es" target="_blank" rel="noopener noreferrer">
-                    <div className="social-btn"><FaInstagram size={20} /></div>
-                  </a>
                 </div>
               </div>
             </div>
@@ -448,9 +445,6 @@ export default function App() {
                 </a>
                 <a href="https://www.linkedin.com/in/daniel-mafla-782541317/?skipRedirect=true" target="_blank" rel="noopener noreferrer">
                   <div className="social-btn"><FaLinkedin size={20} /></div>
-                </a>
-                <a href="https://www.instagram.com/daniel_mafla05/?hl=es" target="_blank" rel="noopener noreferrer">
-                  <div className="social-btn"><FaInstagram size={20} /></div>
                 </a>
               </div>
             </div>
