@@ -408,25 +408,18 @@
 
 
         .glass {
-          background: rgba(255, 255, 255, 0.18);
-          backdrop-filter: blur(22px);
-          -webkit-backdrop-filter: blur(22px);
-          transition: all 0.35s ease;
-        
-          border: 1px solid rgba(255, 255, 255, 0.35);
-        
-          box-shadow: 
-            0 10px 40px rgba(124, 58, 237, 0.25),
-            inset 0 1px 0 rgba(255, 255, 255, 0.7);
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          box-shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+          transition: all 0.3s ease;
         }
 
         .glass:hover {
-          transform: translateY(-8px) scale(1.02);
-          
-          border: 1px solid rgba(167, 139, 250, 0.6);
-          box-shadow: 
-            0 20px 60px rgba(124, 58, 237, 0.35),
-            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+          transform: translateY(-6px);
+          box-shadow: 0 12px 40px rgba(124, 58, 237, 0.25);
+          border: 1px solid rgba(124, 58, 237, 0.4);
         }
 
         .testimonial-card {
