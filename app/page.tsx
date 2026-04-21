@@ -296,10 +296,11 @@ export default function App() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22 }}>
             {[
-              { img: '/reproductor xsound.png', title: 'XSOUND', desc: 'Reproductor de musica de manera local o online', tags: ['Typescript',"CSS"], cta: 'Ver proyecto' },
+              { img: '/reproductor xsound.png', title: 'XSOUND', desc: 'Reproductor de musica de manera local o online', tags: ['Typescript',"CSS"], cta: 'Ver proyecto', link: 'https://reproductor-musica-delta.vercel.app/' },
               { img: 'https://images.unsplash.com/photo-1661246627162-feb0269e0c07?w=600&q=80', title: 'Saborify', desc: 'Aplicación que te ayuda a cocinar y te recomienda recetas dependiendo tus necesidades', tags: ['TypeScript', 'Css'], cta: 'Ver proyecto' },
             ].map((p, i) => (
-              <div key={i} className={`proj-card glass reveal reveal-d${i + 1}`}>
+              <div key={i} className={`proj-card glass reveal reveal-d${i + 1}`}onClick={() => window.open(p.link, "_blank")}
+              style={{ cursor: 'pointer' }}>
                 <div className="proj-card-img">
                   <img src={p.img} alt={p.title} />
                   <div className="proj-card-overlay">
