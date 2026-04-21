@@ -42,8 +42,8 @@ export default function App() {
     blobOpacity: 0.22,
     sectionDivider: 'transparent',
   } : {
-    bg: '#fafafa',
-    bgAlt: '#fafafa',
+    bg: '#f7f6ff',
+    bgAlt: '#f7f6ff',
     surface: '#ffffff',
     border: '#e8e4fc',
     borderLight: '#f0eeff',
@@ -53,14 +53,14 @@ export default function App() {
     pill: { bg: '#ede9fe', border: '#c4b5fd55', color: '#7c3aed' },
     chip: { bg: '#f5f3ff', border: '#e8e4fc', color: '#7c3aed' },
     card: { bg: '#ffffff', border: '#e8e4fc' },
-    navBg: '#fafafaee',
+    navBg: '#f7f6ffee',
     footer: '#f0eeff',
     badge: { bg: '#ede9fe', border: '#c4b5fd55', color: '#7c3aed' },
     skillCard: { bg: '#ffffff', border: '#e8e4fc' },
     contactInput: { bg: '#f9f8ff', border: '#e8e4fc' },
     timelineLine: '#e8e4fc',
-    aboutGrad: 'linear-gradient(to top, #fafafaf0 0%, transparent 55%)',
-    tagBg: '#fafafaee', tagColor: '#7c3aed', tagBorder: '#a855f755',
+    aboutGrad: 'linear-gradient(to top, #f7f6fff0 0%, transparent 55%)',
+    tagBg: '#f7f6ffee', tagColor: '#7c3aed', tagBorder: '#a855f755',
     socialBtn: { bg: '#ede9fe', border: '#c4b5fd55', color: '#7c3aed' },
     langBtn: { bg: '#ede9fe', border: '#c4b5fd55', color: '#7c3aed' },
     iconCircle: '#ede9fe',
@@ -294,13 +294,18 @@ export default function App() {
     transition: T, boxSizing: 'border-box' as const, display: 'block',
   };
 
-  // Separador sutil entre secciones en lugar de cambio de fondo
-  const sectionSeparator: React.CSSProperties = {
-    borderTop: `1px solid ${darkMode ? '#1e1e38' : '#ede9fe'}`,
+  const pageBg: React.CSSProperties = {
+    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    background: darkMode
+      ? '#0f0f1a'
+      : '#f7f6ff',
+    minHeight: '100vh',
+    color: c.text,
+    transition: T,
   };
 
   return (
-    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", background: c.bg, minHeight: '100vh', color: c.text, transition: T }}>
+    <div style={pageBg}>
 
       {/* NAVBAR */}
       <nav style={{
@@ -355,9 +360,7 @@ export default function App() {
       </nav>
 
       {/* ── HERO ── */}
-      <section id="inicio" style={{ padding: '110px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T }}>
-        <div className="blob" style={{ width: 600, height: 600, background: '#7c3aed', top: -200, left: -150, opacity: darkMode ? 0.18 : 1 }} />
-        <div className="blob" style={{ width: 350, height: 350, background: '#a855f7', bottom: -80, right: 60, opacity: darkMode ? 0.14 : 1 }} />
+      <section id="inicio" style={{ padding: '110px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 80, alignItems: 'center', position: 'relative' }}>
           <div>
             <div className={`pill fade-t ${isChanging ? 'lang-out' : 'lang-in'}`} style={{ background: c.pill.bg, border: `1px solid ${c.pill.border}`, color: c.pill.color, transition: T }}>{t.available}</div>
@@ -394,8 +397,7 @@ export default function App() {
       </section>
 
       {/* ── ACERCA ── */}
-      <section id="acerca" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T, ...sectionSeparator }}>
-        <div className="blob" style={{ width: 400, height: 400, background: '#7c3aed', top: -80, right: -80, opacity: darkMode ? 0.15 : 1 }} />
+      <section id="acerca" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 64, alignItems: 'start', position: 'relative' }}>
           <div className="reveal reveal-d1">
             <div className="about-img-wrap">
@@ -437,8 +439,7 @@ export default function App() {
       </section>
 
       {/* ── PROYECTOS ── */}
-      <section id="proyectos" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T, ...sectionSeparator }}>
-        <div className="blob" style={{ width: 450, height: 450, background: '#7c3aed', bottom: -100, left: -100, opacity: darkMode ? 0.15 : 1 }} />
+      <section id="proyectos" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }} className="reveal">
             <div className={`pill fade-t ${isChanging ? 'lang-out' : 'lang-in'}`} style={{ display: 'inline-flex', background: c.pill.bg, border: `1px solid ${c.pill.border}`, color: c.pill.color, transition: T }}>{t.projectsPill}</div>
@@ -478,8 +479,7 @@ export default function App() {
       </section>
 
       {/* ── TESTIMONIOS ── */}
-      <section id="testimonios" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T, ...sectionSeparator }}>
-        <div className="blob" style={{ width: 350, height: 350, background: '#a855f7', top: -60, right: 100, opacity: darkMode ? 0.15 : 1 }} />
+      <section id="testimonios" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }} className="reveal">
             <div className={`pill fade-t ${isChanging ? 'lang-out' : 'lang-in'}`} style={{ display: 'inline-flex', background: c.pill.bg, border: `1px solid ${c.pill.border}`, color: c.pill.color, transition: T }}>{t.testiPill}</div>
@@ -514,8 +514,7 @@ export default function App() {
       </section>
 
       {/* ── EXPERIENCIA ── */}
-      <section id="experiencia" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T, ...sectionSeparator }}>
-        <div className="blob" style={{ width: 380, height: 380, background: '#7c3aed', bottom: -60, right: -40, opacity: darkMode ? 0.15 : 1 }} />
+      <section id="experiencia" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }} className="reveal">
             <div className={`pill fade-t ${isChanging ? 'lang-out' : 'lang-in'}`} style={{ display: 'inline-flex', background: c.pill.bg, border: `1px solid ${c.pill.border}`, color: c.pill.color, transition: T }}>{t.expPill}</div>
@@ -567,8 +566,7 @@ export default function App() {
       </section>
 
       {/* ── CONTACTO ── */}
-      <section id="contacto" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T, ...sectionSeparator }}>
-        <div className="blob" style={{ width: 420, height: 420, background: '#7c3aed', bottom: -100, left: -80, opacity: darkMode ? 0.15 : 1 }} />
+      <section id="contacto" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }} className="reveal">
             <div className={`pill fade-t ${isChanging ? 'lang-out' : 'lang-in'}`} style={{ display: 'inline-flex', background: c.pill.bg, border: `1px solid ${c.pill.border}`, color: c.pill.color, transition: T }}>{t.contactPill}</div>
@@ -644,7 +642,7 @@ export default function App() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{ background: c.footer, borderTop: `1px solid ${c.border}`, padding: '60px 0 28px', transition: T }}>
+      <footer style={{ background: darkMode ? '#0d0d18' : '#ede9fe', borderTop: `1px solid ${c.border}`, padding: '60px 0 28px', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 40, marginBottom: 48 }}>
             <div>
