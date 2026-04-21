@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { motion } from "framer-motion";
 import {
   Download,
   Mail,
@@ -10,6 +11,16 @@ import {
 } from 'lucide-react';
  
 import { FaGithub, FaLinkedin,  } from "react-icons/fa";
+
+const sectionVariant = {
+  hidden: { opacity: 0, y: 60 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
+
  
  
  
@@ -17,6 +28,10 @@ import { FaGithub, FaLinkedin,  } from "react-icons/fa";
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('inicio');
   const [text, setText] = useState("");
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    show: { opacity: 1, y: 0 }
+  };
   const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -29,6 +44,7 @@ export default function App() {
   
     const rotateX = -(y - centerY) / 12;
     const rotateY = (x - centerX) / 12;
+
   
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
   };
@@ -147,7 +163,14 @@ export default function App() {
       </nav>
  
       {/* ── HERO ── */}
-      <section id="inicio" className="bg-dots" style={{ padding: '110px 0', position: 'relative', overflow: 'hidden' }}>
+      <motion.section
+  id="inicio"
+  className="bg-dots"
+  style={{ padding: '110px 0', position: 'relative', overflow: 'hidden' }}
+  variants={sectionVariant}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, amount: 0.2 }}>
         <div className="blob" style={{ width: 600, height: 600, background: '#7c3aed', top: -200, left: -150 }} />
         <div className="blob" style={{ width: 350, height: 350, background: '#a855f7', bottom: -80, right: 60 }} />
  
