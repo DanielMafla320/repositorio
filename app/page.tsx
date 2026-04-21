@@ -88,37 +88,76 @@ export default function App() {
   }, []);
  
   useEffect(() => {
-    const elements = document.querySelectorAll('.reveal, .reveal-exp');
-
+    const elements = document.querySelectorAll('.reveal, .reveal-exp, .timeline-line');
+  
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            obs.unobserve(entry.target);
+            const el = entry.target as HTMLElement;
+  
+            // ─────────────────────────────
+            // ✨ ANIMACIÓN BASE (reveal normal)
+            // ─────────────────────────────
+            el.classList.add('active');
+  
+            // ─────────────────────────────
+            // ⚡ EXPERIENCIA: efecto escalonado
+            // ─────────────────────────────
+            if (el.classList.contains('reveal-exp')) {
+              const index = Array.from(elements).indexOf(entry.target);
+              el.style.transitionDelay = `${index * 120}ms`;
+            }
+  
+            // 🌊 TIMELINE ANIMATION
+
+            if (el.classList.contains('timeline-line')) {
+              el.classList.add('active');
+            }
+  
+            obs.unobserve(el);
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+      {
+        threshold: 0.1, rootMargin: "0px 0px -120px 0px"
+      }
     );
+  
     elements.forEach((el) => observer.observe(el));
- 
-    // shimmer para la imagen del about
+  
+  
+    //  SHIMMER ABOUT IMAGE
+
     const imgWrap = document.querySelector('.about-img-wrap');
+  
     const shimmerObs = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('shimmer-active');
-            obs.unobserve(entry.target);
+            const el = entry.target as HTMLElement;
+  
+            el.classList.add('shimmer-active');
+  
+            //    efecto 
+            el.style.transform = "scale(1.02)";
+  
+            obs.unobserve(el);
           }
         });
       },
       { threshold: 0.3 }
     );
+  
     if (imgWrap) shimmerObs.observe(imgWrap);
- 
-    return () => { observer.disconnect(); shimmerObs.disconnect(); };
+  
+  
+    //  CLEANUP
+  
+    return () => {
+      observer.disconnect();
+      shimmerObs.disconnect();
+    };
   }, []);
  
   const scrollToSection = (sectionId: string) => {
