@@ -309,7 +309,7 @@ export default function App() {
           <div className="reveal reveal-d2">
             <div className="pill">✦ Sobre mí</div>
             <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: 50, fontWeight: 800, color: '#1a1a2e', lineHeight: 1.08, marginBottom: 22 }}>
-              Acerca <br />de <span className="grad-subtle">mí</span>
+              <span className="grad-subtle">{translations[language].aboutTitle}</span>
             </h2>
             <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6868a0', marginBottom: 14 }}>
             Soy estudiante de Ingeniería de Software apasionado por la tecnología y el desarrollo de soluciones
@@ -471,9 +471,9 @@ export default function App() {
           <div style={{ textAlign: 'center', marginBottom: 60 }} className="reveal">
             <div className="pill" style={{ display: 'inline-flex' }}>✦ Contacto</div>
             <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: 50, fontWeight: 800, color: '#1a1a2e', marginBottom: 10 }}>
-              Hablemos <span className="grad">juntos</span>
+             <span className="grad">{translations[language].contactTitle}</span>
             </h2>
-            <p style={{ color: '#9090b0', fontSize: 15 }}>¿Tienes un proyecto en mente? Escríbeme</p>
+            <p style={{ color: '#9090b0', fontSize: 15 }}>{translations[language].contactDesc}</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28 }}>
             {/* Formulario */}
