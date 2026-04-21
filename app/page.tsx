@@ -16,8 +16,8 @@ export default function App() {
   // ── COLOR TOKENS ──
   const c = darkMode ? {
     bg: '#0f0f1a',
-    bgAlt: '#13131f',
-    surface: '#1a1a2e',
+    bgAlt: '#0f0f1a',
+    surface: '#13131f',
     border: '#2a2a45',
     borderLight: '#1e1e38',
     text: '#f0eeff',
@@ -25,11 +25,11 @@ export default function App() {
     textSoft: '#7070a0',
     pill: { bg: '#1e1e38', border: '#3a3a60', color: '#c4b5fd' },
     chip: { bg: '#1e1e38', border: '#3a3a60', color: '#a78bfa' },
-    card: { bg: '#1a1a2e', border: '#2a2a45' },
+    card: { bg: '#16162a', border: '#2a2a45' },
     navBg: '#0f0f1aee',
     footer: '#0d0d1a',
     badge: { bg: '#1e1e38', border: '#3a3a60', color: '#a78bfa' },
-    skillCard: { bg: '#1a1a2e', border: '#2a2a45' },
+    skillCard: { bg: '#16162a', border: '#2a2a45' },
     contactInput: { bg: '#13131f', border: '#2a2a45' },
     timelineLine: '#2a2a45',
     aboutGrad: 'linear-gradient(to top, #0f0f1af0 0%, transparent 55%)',
@@ -40,9 +40,10 @@ export default function App() {
     dotNode: '#1e1e38',
     expBadge: { bg: '#1e1e38', border: '#3a3a60' },
     blobOpacity: 0.22,
+    sectionDivider: 'transparent',
   } : {
     bg: '#fafafa',
-    bgAlt: '#f4f3ff',
+    bgAlt: '#fafafa',
     surface: '#ffffff',
     border: '#e8e4fc',
     borderLight: '#f0eeff',
@@ -58,7 +59,7 @@ export default function App() {
     skillCard: { bg: '#ffffff', border: '#e8e4fc' },
     contactInput: { bg: '#f9f8ff', border: '#e8e4fc' },
     timelineLine: '#e8e4fc',
-    aboutGrad: 'linear-gradient(to top, #f4f3fff0 0%, transparent 55%)',
+    aboutGrad: 'linear-gradient(to top, #fafafaf0 0%, transparent 55%)',
     tagBg: '#fafafaee', tagColor: '#7c3aed', tagBorder: '#a855f755',
     socialBtn: { bg: '#ede9fe', border: '#c4b5fd55', color: '#7c3aed' },
     langBtn: { bg: '#ede9fe', border: '#c4b5fd55', color: '#7c3aed' },
@@ -66,6 +67,7 @@ export default function App() {
     dotNode: '#ede9fe',
     expBadge: { bg: '#ede9fe', border: '#c4b5fd55' },
     blobOpacity: 1,
+    sectionDivider: '#e8e4fc',
   };
 
   const changeLanguage = () => {
@@ -271,16 +273,30 @@ export default function App() {
   ];
 
   const T = 'all 0.4s ease';
+
+  // FIXED: cardStyle ahora usa los valores correctos de c.card directamente
+  // sin depender de referencias stale
+  const cardBg = darkMode ? '#16162a' : '#ffffff';
+  const cardBorder = darkMode ? '#2a2a45' : '#e8e4fc';
+
   const cardStyle: React.CSSProperties = {
-    background: c.card.bg, border: `1.5px solid ${c.card.border}`,
-    borderRadius: 22, boxShadow: darkMode ? '0 4px 32px #00000050' : '0 4px 24px #7c3aed08',
+    background: cardBg,
+    border: `1.5px solid ${cardBorder}`,
+    borderRadius: 22,
+    boxShadow: darkMode ? '0 4px 32px #00000050' : '0 4px 24px #7c3aed08',
     transition: T,
   };
+
   const inputStyle: React.CSSProperties = {
     width: '100%', padding: '12px 16px', borderRadius: 12, fontSize: 14,
     background: c.contactInput.bg, border: `1.5px solid ${c.contactInput.border}`,
     color: c.text, outline: 'none', fontFamily: "'Plus Jakarta Sans', sans-serif",
     transition: T, boxSizing: 'border-box' as const, display: 'block',
+  };
+
+  // Separador sutil entre secciones en lugar de cambio de fondo
+  const sectionSeparator: React.CSSProperties = {
+    borderTop: `1px solid ${darkMode ? '#1e1e38' : '#ede9fe'}`,
   };
 
   return (
@@ -305,8 +321,6 @@ export default function App() {
                 {t.nav[s as keyof typeof t.nav]}
               </button>
             ))}
-
-            {/* DARK MODE BTN */}
             <button
               onClick={toggleDark}
               title={darkMode ? 'Modo claro' : 'Modo oscuro'}
@@ -321,8 +335,6 @@ export default function App() {
                 {darkMode ? <Sun size={16} style={{ color: '#fbbf24' }} /> : <Moon size={16} style={{ color: '#f0eeff' }} />}
               </span>
             </button>
-
-            {/* LANG BTN */}
             <button
               onClick={changeLanguage}
               title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
@@ -343,7 +355,7 @@ export default function App() {
       </nav>
 
       {/* ── HERO ── */}
-      <section id="inicio" className="bg-dots" style={{ padding: '110px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T }}>
+      <section id="inicio" style={{ padding: '110px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T }}>
         <div className="blob" style={{ width: 600, height: 600, background: '#7c3aed', top: -200, left: -150, opacity: darkMode ? 0.18 : 1 }} />
         <div className="blob" style={{ width: 350, height: 350, background: '#a855f7', bottom: -80, right: 60, opacity: darkMode ? 0.14 : 1 }} />
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 80, alignItems: 'center', position: 'relative' }}>
@@ -382,7 +394,7 @@ export default function App() {
       </section>
 
       {/* ── ACERCA ── */}
-      <section id="acerca" className="bg-dots-alt" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bgAlt, transition: T }}>
+      <section id="acerca" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T, ...sectionSeparator }}>
         <div className="blob" style={{ width: 400, height: 400, background: '#7c3aed', top: -80, right: -80, opacity: darkMode ? 0.15 : 1 }} />
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 64, alignItems: 'start', position: 'relative' }}>
           <div className="reveal reveal-d1">
@@ -410,7 +422,7 @@ export default function App() {
                 { skills: ['Django', 'Next.js', 'API REST'] },
                 { skills: ['Git & GitHub', 'Figma', 'VS Code', 'Postman'] },
               ].map((card, i) => (
-                <div key={i} className={`reveal reveal-d${i + 1}`} style={{ background: c.skillCard.bg, border: `1.5px solid ${c.skillCard.border}`, borderRadius: 18, padding: 18, boxShadow: darkMode ? '0 2px 12px #00000030' : '0 2px 12px #7c3aed06', transition: T }}>
+                <div key={i} className={`reveal reveal-d${i + 1}`} style={{ background: darkMode ? '#16162a' : '#ffffff', border: `1.5px solid ${darkMode ? '#2a2a45' : '#e8e4fc'}`, borderRadius: 18, padding: 18, boxShadow: darkMode ? '0 2px 12px #00000030' : '0 2px 12px #7c3aed06', transition: T }}>
                   <div style={{ fontSize: 11, fontWeight: 700, color: '#7c3aed', letterSpacing: '0.09em', textTransform: 'uppercase', marginBottom: 12 }}>
                     <span className={`fade-t ${isChanging ? 'lang-out' : 'lang-in'}`}>{t.skillTitles[i]}</span>
                   </div>
@@ -425,7 +437,7 @@ export default function App() {
       </section>
 
       {/* ── PROYECTOS ── */}
-      <section id="proyectos" className="bg-dots" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T }}>
+      <section id="proyectos" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T, ...sectionSeparator }}>
         <div className="blob" style={{ width: 450, height: 450, background: '#7c3aed', bottom: -100, left: -100, opacity: darkMode ? 0.15 : 1 }} />
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }} className="reveal">
@@ -441,7 +453,7 @@ export default function App() {
               return (
                 <div key={i} className={`proj-card glass reveal reveal-d${i + 1}`}
                   onClick={() => { if (!meta.comingSoon && meta.link) window.open(meta.link, '_blank'); }}
-                  style={{ cursor: meta.comingSoon ? 'not-allowed' : 'pointer', background: c.card.bg, border: `1.5px solid ${c.card.border}`, transition: T }}>
+                  style={{ cursor: meta.comingSoon ? 'not-allowed' : 'pointer', background: cardBg, border: `1.5px solid ${cardBorder}`, transition: T }}>
                   <div className="proj-card-img">
                     <img src={meta.img} alt={p.title} />
                     <div className="proj-card-overlay">
@@ -466,7 +478,7 @@ export default function App() {
       </section>
 
       {/* ── TESTIMONIOS ── */}
-      <section id="testimonios" className="bg-dots-alt" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bgAlt, transition: T }}>
+      <section id="testimonios" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T, ...sectionSeparator }}>
         <div className="blob" style={{ width: 350, height: 350, background: '#a855f7', top: -60, right: 100, opacity: darkMode ? 0.15 : 1 }} />
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }} className="reveal">
@@ -480,7 +492,7 @@ export default function App() {
             {t.testimonials.map((testi, i) => (
               <div key={i} className={`testimonial-card glass reveal reveal-d${i + 1}`}
                 onMouseMove={handleTilt} onMouseLeave={resetTilt}
-                style={{ borderRadius: 20, padding: 28, position: 'relative', overflow: 'hidden', background: c.card.bg, border: `1.5px solid ${c.card.border}`, transition: T }}>
+                style={{ borderRadius: 20, padding: 28, position: 'relative', overflow: 'hidden', background: cardBg, border: `1.5px solid ${cardBorder}`, transition: T }}>
                 <div className="testi-quote" style={{ color: darkMode ? '#2a2a45' : undefined }}>"</div>
                 <div style={{ display: 'flex', gap: 3, marginBottom: 16 }}>
                   {[...Array(5)].map((_, j) => <span key={j} style={{ color: '#a855f7', fontSize: 14 }}>★</span>)}
@@ -502,7 +514,7 @@ export default function App() {
       </section>
 
       {/* ── EXPERIENCIA ── */}
-      <section id="experiencia" className="bg-dots" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T }}>
+      <section id="experiencia" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T, ...sectionSeparator }}>
         <div className="blob" style={{ width: 380, height: 380, background: '#7c3aed', bottom: -60, right: -40, opacity: darkMode ? 0.15 : 1 }} />
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }} className="reveal">
@@ -513,15 +525,35 @@ export default function App() {
             <p key={language + 'ed'} className="fade-text" style={{ color: c.textMuted, fontSize: 15, transition: T }}>{t.expDesc}</p>
           </div>
           <div style={{ maxWidth: 720, margin: '0 auto', position: 'relative' }}>
-            <div className="timeline-line" style={{ background: c.timelineLine, transition: T }} />
+            <div className="timeline-line" style={{ background: darkMode ? '#2a2a45' : '#e8e4fc', transition: T }} />
             {t.experience.map((item, i) => (
-              <div key={i} className={`exp-card reveal-exp reveal-d${i + 1}`} style={{ display: 'flex', gap: 28, marginBottom: 24, paddingLeft: 4 }}>
-                <div style={{ width: 26, height: 26, borderRadius: '50%', background: c.dotNode, border: '2px solid #7c3aed', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 6, zIndex: 1, transition: T }}>
+              <div key={i} style={{ display: 'flex', gap: 28, marginBottom: 24, paddingLeft: 4 }}>
+                <div style={{
+                  width: 26, height: 26, borderRadius: '50%',
+                  background: darkMode ? '#1e1e38' : '#ede9fe',
+                  border: '2px solid #7c3aed',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0, marginTop: 6, zIndex: 1, transition: T,
+                }}>
                   <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#7c3aed' }} />
                 </div>
-                <div style={{ flex: 1, ...cardStyle, padding: 24 }}>
+                <div className={`reveal reveal-d${i + 1}`} style={{
+                  flex: 1,
+                  background: darkMode ? '#16162a' : '#ffffff',
+                  border: `1.5px solid ${darkMode ? '#2a2a45' : '#e8e4fc'}`,
+                  borderRadius: 22,
+                  boxShadow: darkMode ? '0 4px 32px #00000050' : '0 4px 24px #7c3aed08',
+                  transition: T,
+                  padding: 24,
+                }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10, flexWrap: 'wrap', gap: 8 }}>
-                    <span style={{ fontSize: 10, fontWeight: 700, color: '#7c3aed', background: c.expBadge.bg, border: `1px solid ${c.expBadge.border}`, borderRadius: 8, padding: '4px 10px', textTransform: 'uppercase', letterSpacing: '0.08em', transition: T }}>{item.type}</span>
+                    <span style={{
+                      fontSize: 10, fontWeight: 700, color: '#7c3aed',
+                      background: darkMode ? '#1e1e38' : '#ede9fe',
+                      border: `1px solid ${darkMode ? '#3a3a60' : '#c4b5fd55'}`,
+                      borderRadius: 8, padding: '4px 10px',
+                      textTransform: 'uppercase', letterSpacing: '0.08em', transition: T,
+                    }}>{item.type}</span>
                     <span style={{ fontSize: 12, fontWeight: 600, color: c.textMuted, transition: T }}>{item.date}</span>
                   </div>
                   <h3 style={{ fontSize: 16, fontWeight: 700, color: c.text, marginBottom: 4, transition: T }}>{item.title}</h3>
@@ -535,7 +567,7 @@ export default function App() {
       </section>
 
       {/* ── CONTACTO ── */}
-      <section id="contacto" className="bg-dots-alt" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bgAlt, transition: T }}>
+      <section id="contacto" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: c.bg, transition: T, ...sectionSeparator }}>
         <div className="blob" style={{ width: 420, height: 420, background: '#7c3aed', bottom: -100, left: -80, opacity: darkMode ? 0.15 : 1 }} />
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }} className="reveal">
