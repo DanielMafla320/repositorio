@@ -1,22 +1,22 @@
 "use client";
- 
+
 import { useState, useEffect } from 'react';
 import { Download, Mail, Phone, MapPin, Send, Globe, Sun, Moon } from 'lucide-react';
 import { FaGithub, FaLinkedin } from "react-icons/fa";
- 
+
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('inicio');
   const [text, setText] = useState("");
   const [language, setLanguage] = useState<'es' | 'en'>('es');
   const [isChanging, setIsChanging] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
- 
+
   const toggleDark = () => setDarkMode(prev => !prev);
- 
+
   // ── COLOR TOKENS ──
   const c = darkMode ? {
-    bg: '#0f0f1a',
-    bgAlt: '#0f0f1a',
+    bg: '#0b0b16',
+    bgAlt: '#0b0b16',
     surface: '#13131f',
     border: '#2a2a45',
     borderLight: '#1e1e38',
@@ -26,13 +26,13 @@ export default function App() {
     pill: { bg: '#1e1e38', border: '#3a3a60', color: '#c4b5fd' },
     chip: { bg: '#1e1e38', border: '#3a3a60', color: '#a78bfa' },
     card: { bg: '#16162a', border: '#2a2a45' },
-    navBg: '#0f0f1aee',
-    footer: '#0d0d1a',
+    navBg: '#0b0b16dd',
+    footer: '#08080f',
     badge: { bg: '#1e1e38', border: '#3a3a60', color: '#a78bfa' },
     skillCard: { bg: '#16162a', border: '#2a2a45' },
     contactInput: { bg: '#13131f', border: '#2a2a45' },
     timelineLine: '#2a2a45',
-    aboutGrad: 'linear-gradient(to top, #0f0f1af0 0%, transparent 55%)',
+    aboutGrad: 'linear-gradient(to top, #0b0b16f0 0%, transparent 55%)',
     tagBg: '#1e1e38', tagColor: '#a78bfa', tagBorder: '#3a3a60',
     socialBtn: { bg: '#1e1e38', border: '#3a3a60', color: '#a78bfa' },
     langBtn: { bg: '#1e1e38', border: '#3a3a60', color: '#a78bfa' },
@@ -42,8 +42,8 @@ export default function App() {
     blobOpacity: 0.22,
     sectionDivider: 'transparent',
   } : {
-    bg: '#f8f7ff',
-    bgAlt: '#f8f7ff',
+    bg: '#f5f3ff',
+    bgAlt: '#f5f3ff',
     surface: '#ffffff',
     border: '#e8e4fc',
     borderLight: '#f0eeff',
@@ -53,14 +53,14 @@ export default function App() {
     pill: { bg: '#ede9fe', border: '#c4b5fd55', color: '#7c3aed' },
     chip: { bg: '#f5f3ff', border: '#e8e4fc', color: '#7c3aed' },
     card: { bg: '#ffffff', border: '#e8e4fc' },
-    navBg: '#f8f7ffdd',
+    navBg: '#f5f3ffdd',
     footer: '#f0eeff',
     badge: { bg: '#ede9fe', border: '#c4b5fd55', color: '#7c3aed' },
     skillCard: { bg: '#ffffff', border: '#e8e4fc' },
     contactInput: { bg: '#f9f8ff', border: '#e8e4fc' },
     timelineLine: '#e8e4fc',
-    aboutGrad: 'linear-gradient(to top, #f8f7fff0 0%, transparent 55%)',
-    tagBg: '#f8f7ffee', tagColor: '#7c3aed', tagBorder: '#a855f755',
+    aboutGrad: 'linear-gradient(to top, #f5f3fff0 0%, transparent 55%)',
+    tagBg: '#f5f3ffee', tagColor: '#7c3aed', tagBorder: '#a855f755',
     socialBtn: { bg: '#ede9fe', border: '#c4b5fd55', color: '#7c3aed' },
     langBtn: { bg: '#ede9fe', border: '#c4b5fd55', color: '#7c3aed' },
     iconCircle: '#ede9fe',
@@ -69,7 +69,7 @@ export default function App() {
     blobOpacity: 1,
     sectionDivider: '#e8e4fc',
   };
- 
+
   const changeLanguage = () => {
     setIsChanging(true);
     setTimeout(() => {
@@ -77,7 +77,7 @@ export default function App() {
       setIsChanging(false);
     }, 250);
   };
- 
+
   const translations = {
     es: {
       available: '✦ Disponible para proyectos',
@@ -202,9 +202,9 @@ export default function App() {
       nav: { inicio: 'Home', acerca: 'About', proyectos: 'Projects', testimonios: 'Testimonials', experiencia: 'Experience', contacto: 'Contact' },
     },
   };
- 
+
   const t = translations[language];
- 
+
   const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -215,7 +215,7 @@ export default function App() {
   const resetTilt = (e: React.MouseEvent<HTMLDivElement>) => {
     e.currentTarget.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
   };
- 
+
   useEffect(() => {
     const words = ["Software Engineering Student", "Frontend Developer", "Backend Developer", "Problem Solver"];
     let wordIndex = 0, charIndex = 0, isDeleting = false;
@@ -229,7 +229,7 @@ export default function App() {
     const iv = setInterval(type, isDeleting ? 40 : 80);
     return () => clearInterval(iv);
   }, []);
- 
+
   useEffect(() => {
     const els = document.querySelectorAll('.reveal, .reveal-exp');
     const obs = new IntersectionObserver((entries, o) => {
@@ -261,24 +261,24 @@ export default function App() {
     if (imgWrap) shimObs.observe(imgWrap);
     return () => { obs.disconnect(); shimObs.disconnect(); };
   }, []);
- 
+
   const scrollToSection = (id: string) => {
     setActiveSection(id);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
- 
+
   const projectMeta = [
     { img: '/reproductor xsound.png', tags: ['Typescript', 'CSS'], link: 'https://reproductor-musica-delta.vercel.app/', comingSoon: false },
     { img: 'https://images.unsplash.com/photo-1661246627162-feb0269e0c07?w=600&q=80', tags: ['TypeScript', 'CSS'], comingSoon: true },
   ];
- 
+
   const T = 'all 0.4s ease';
- 
+
   // FIXED: cardStyle ahora usa los valores correctos de c.card directamente
   // sin depender de referencias stale
   const cardBg = darkMode ? '#16162a' : '#ffffff';
   const cardBorder = darkMode ? '#2a2a45' : '#e8e4fc';
- 
+
   const cardStyle: React.CSSProperties = {
     background: cardBg,
     border: `1.5px solid ${cardBorder}`,
@@ -286,34 +286,36 @@ export default function App() {
     boxShadow: darkMode ? '0 4px 32px #00000050' : '0 4px 24px #7c3aed08',
     transition: T,
   };
- 
+
   const inputStyle: React.CSSProperties = {
     width: '100%', padding: '12px 16px', borderRadius: 12, fontSize: 14,
     background: c.contactInput.bg, border: `1.5px solid ${c.contactInput.border}`,
     color: c.text, outline: 'none', fontFamily: "'Plus Jakarta Sans', sans-serif",
     transition: T, boxSizing: 'border-box' as const, display: 'block',
   };
- 
-  const gridColor = darkMode ? '40,40,80' : '124,58,237';
-  const gridOpacity = darkMode ? '0.18' : '0.06';
+
   const pageBg: React.CSSProperties = {
     fontFamily: "'Plus Jakarta Sans', sans-serif",
-    backgroundColor: darkMode ? '#0f0f1a' : '#f8f7ff',
-    backgroundImage: `
-      linear-gradient(rgba(${gridColor},${gridOpacity}) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(${gridColor},${gridOpacity}) 1px, transparent 1px),
-      radial-gradient(ellipse 80% 50% at 20% 10%, ${darkMode ? 'rgba(124,58,237,0.12)' : 'rgba(139,92,246,0.10)'} 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 80%, ${darkMode ? 'rgba(168,85,247,0.10)' : 'rgba(196,181,253,0.25)'} 0%, transparent 55%)
+    backgroundColor: darkMode ? '#0b0b16' : '#f5f3ff',
+    backgroundImage: darkMode ? `
+      radial-gradient(ellipse 70% 55% at 15% 8%,  rgba(109,40,217,0.40) 0%, transparent 65%),
+      radial-gradient(ellipse 55% 45% at 88% 18%,  rgba(139,92,246,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 75% 85%,  rgba(168,85,247,0.30) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 35% at 10% 80%,  rgba(91,33,182,0.22) 0%, transparent 55%)
+    ` : `
+      radial-gradient(ellipse 65% 50% at 12% 6%,   rgba(139,92,246,0.55) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 40% at 90% 15%,  rgba(167,139,250,0.50) 0%, transparent 58%),
+      radial-gradient(ellipse 55% 45% at 78% 88%,  rgba(139,92,246,0.45) 0%, transparent 60%),
+      radial-gradient(ellipse 38% 32% at 8%  82%,  rgba(196,181,253,0.55) 0%, transparent 55%)
     `,
-    backgroundSize: '40px 40px, 40px 40px, 100% 100%, 100% 100%',
     minHeight: '100vh',
     color: c.text,
     transition: T,
   };
- 
+
   return (
     <div style={pageBg}>
- 
+
       {/* NAVBAR */}
       <nav style={{
         position: 'sticky', top: 0, zIndex: 50,
@@ -365,7 +367,7 @@ export default function App() {
           </div>
         </div>
       </nav>
- 
+
       {/* ── HERO ── */}
       <section id="inicio" style={{ padding: '110px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 80, alignItems: 'center', position: 'relative' }}>
@@ -374,7 +376,7 @@ export default function App() {
             <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 'clamp(42px, 8vw, 76px)', fontWeight: 800, lineHeight: 1, color: c.text, marginBottom: 16, transition: T }}>
               Daniel<br /><span className="grad">Mafla</span>
             </h1>
-            <h2 style={{ fontSize: 20, fontWeight: 600, color: c.textMuted, marginBottom: 24, transition: T }}>
+            <h2 style={{ fontSize: 20, fontWeight: 600, color: darkMode ? '#a78bfa' : '#7c3aed', marginBottom: 24, transition: T }}>
               {text}<span className="cursor">|</span>
             </h2>
             <p key={language} className="fade-text" style={{ fontSize: 15, lineHeight: 1.85, color: c.textSoft, marginBottom: 36, maxWidth: 460, transition: T }}>{t.heroDesc}</p>
@@ -402,7 +404,7 @@ export default function App() {
           </div>
         </div>
       </section>
- 
+
       {/* ── ACERCA ── */}
       <section id="acerca" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 64, alignItems: 'start', position: 'relative' }}>
@@ -444,7 +446,7 @@ export default function App() {
           </div>
         </div>
       </section>
- 
+
       {/* ── PROYECTOS ── */}
       <section id="proyectos" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
@@ -484,7 +486,7 @@ export default function App() {
           </div>
         </div>
       </section>
- 
+
       {/* ── TESTIMONIOS ── */}
       <section id="testimonios" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
@@ -519,8 +521,18 @@ export default function App() {
           </div>
         </div>
       </section>
- 
+
       {/* ── EXPERIENCIA ── */}
+      <style>{`
+        @keyframes slideInLeft {
+          from { opacity: 0; transform: translateX(-32px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes pulseDot {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.55); }
+          50%       { box-shadow: 0 0 0 7px rgba(124,58,237,0); }
+        }
+      `}</style>
       <section id="experiencia" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }} className="reveal">
@@ -540,6 +552,8 @@ export default function App() {
                   border: '2px solid #7c3aed',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexShrink: 0, marginTop: 6, zIndex: 1, transition: T,
+                  animation: 'pulseDot 2.4s ease-in-out infinite',
+                  animationDelay: `${i * 0.8}s`,
                 }}>
                   <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#7c3aed' }} />
                 </div>
@@ -551,6 +565,8 @@ export default function App() {
                   boxShadow: darkMode ? '0 4px 32px #00000050' : '0 4px 24px #7c3aed08',
                   transition: T,
                   padding: 24,
+                  animation: `slideInLeft 0.55s cubic-bezier(0.22,1,0.36,1) both`,
+                  animationDelay: `${0.1 + i * 0.15}s`,
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10, flexWrap: 'wrap', gap: 8 }}>
                     <span style={{
@@ -571,7 +587,7 @@ export default function App() {
           </div>
         </div>
       </section>
- 
+
       {/* ── CONTACTO ── */}
       <section id="contacto" style={{ padding: '100px 0', position: 'relative', overflow: 'hidden', background: 'transparent', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
@@ -647,9 +663,9 @@ export default function App() {
           </div>
         </div>
       </section>
- 
+
       {/* ── FOOTER ── */}
-      <footer style={{ background: darkMode ? '#0d0d18' : '#ede9fe', borderTop: `1px solid ${c.border}`, padding: '60px 0 28px', transition: T }}>
+      <footer style={{ background: darkMode ? '#08080f' : '#ede9fe', borderTop: `1px solid ${c.border}`, padding: '60px 0 28px', transition: T }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 40, marginBottom: 48 }}>
             <div>
