@@ -24,6 +24,22 @@ const sectionVariant = {
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('inicio');
   const [text, setText] = useState("");
+  const [language, setLanguage] = useState<'es' | 'en'>('es');
+
+  const translations = {
+    es: {
+      heroDesc: "Estudiante apasionado por el aprendizaje continuo y los retos técnicos. Me motiva explorar nuevas tecnologías y desarrollar soluciones que generen impacto real.",
+      downloadCV: "Descargar CV",
+      projectsTitle: "Mis Proyectos",
+      projectsDesc: "Proyectos desarrollados aplicando mis conocimientos en programación y desarrollo web.",
+    },
+    en: {
+      heroDesc: "Student passionate about continuous learning and technical challenges. I enjoy exploring new technologies and building impactful solutions.",
+      downloadCV: "Download CV",
+      projectsTitle: "My Projects",
+      projectsDesc: "Projects developed applying my knowledge in programming and web development.",
+    }
+  };
 
   const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
@@ -83,7 +99,10 @@ export default function App() {
     };
   
     const interval = setInterval(type, isDeleting ? deleteSpeed : speed);
+
   
+
+
     return () => clearInterval(interval);
   }, []);
  
@@ -176,6 +195,10 @@ export default function App() {
             {['inicio','acerca','proyectos','testimonios','experiencia','contacto'].map(s => (
               <button key={s} className={`nav-btn ${activeSection === s ? 'active' : ''}`} onClick={() => scrollToSection(s)}>{s}</button>
             ))}
+            <div style={{ display: 'flex', gap: 8, marginLeft: 20 }}>
+  <button onClick={() => setLanguage('es')} className="lang-btn">ES</button>
+  <button onClick={() => setLanguage('en')} className="lang-btn">EN</button>
+</div>
           </div>
         </div>
       </nav>
@@ -196,12 +219,10 @@ export default function App() {
               <span className="cursor">|</span>
             </h2>
             <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6868a0', marginBottom: 36, maxWidth: 460 }}>
-              Estudiante apasionado por el aprendizaje continuo y los retos técnicos.
-              Me motiva explorar nuevas tecnologías y desarrollar soluciones que generen impacto real.
-              Siempre buscando el siguiente desafío que me lleve al siguiente nivel.
+                {translations[language].heroDesc}
             </p>
             <button className="btn-primary">
-              <Download size={18} /> Descargar CV
+              <Download size={18} /> {translations[language].downloadCV}
             </button>
           </div>
  
@@ -290,9 +311,9 @@ export default function App() {
           <div style={{ textAlign: 'center', marginBottom: 60 }} className="reveal">
             <div className="pill" style={{ display: 'inline-flex' }}>✦ Portafolio</div>
             <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: 50, fontWeight: 800, color: '#1a1a2e', marginBottom: 10 }}>
-              Mis <span className="grad">Proyectos</span>
+               <span className="grad">{translations[language].projectsTitle}</span>
             </h2>
-            <p style={{ color: '#9090b0', fontSize: 15 }}>Proyectos desarrollados aplicando mis conocimientos en programación y desarrollo web.</p>
+            <p style={{ color: '#9090b0', fontSize: 15 }}>{translations[language].projectsDesc}</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22 }}>
             {[
