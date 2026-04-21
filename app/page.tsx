@@ -30,14 +30,45 @@ export default function App() {
     es: {
       heroDesc: "Estudiante apasionado por el aprendizaje continuo y los retos técnicos. Me motiva explorar nuevas tecnologías y desarrollar soluciones que generen impacto real.",
       downloadCV: "Descargar CV",
+  
       projectsTitle: "Mis Proyectos",
-      projectsDesc: "Proyectos desarrollados aplicando mis conocimientos en programación y desarrollo web.",
+      projectsDesc: "Proyectos desarrollados aplicando mis conocimientos...",
+  
+      contactTitle: "Hablemos juntos",
+      contactDesc: "¿Tienes un proyecto en mente? Escríbeme",
+  
+      aboutTitle: "Acerca de mí",
+  
+      nav: {
+        inicio: "Inicio",
+        acerca: "Acerca",
+        proyectos: "Proyectos",
+        testimonios: "Testimonios",
+        experiencia: "Experiencia",
+        contacto: "Contacto"
+      }
     },
+  
     en: {
       heroDesc: "Student passionate about continuous learning and technical challenges. I enjoy exploring new technologies and building impactful solutions.",
       downloadCV: "Download CV",
+  
       projectsTitle: "My Projects",
-      projectsDesc: "Projects developed applying my knowledge in programming and web development.",
+      projectsDesc: "Projects developed applying my knowledge...",
+  
+      contactTitle: "Let's talk",
+      contactDesc: "Do you have a project in mind? Contact me",
+  
+      aboutTitle: "About me",
+  
+      nav: {
+        inicio: "Home",
+        acerca: "About",
+        proyectos: "Projects",
+        testimonios: "Testimonials",
+        experiencia: "Experience",
+        contacto: "Contact"
+      }
     }
   };
 
@@ -193,7 +224,8 @@ export default function App() {
           </div>
           <div style={{ display: 'flex', gap: 2 }}>
             {['inicio','acerca','proyectos','testimonios','experiencia','contacto'].map(s => (
-              <button key={s} className={`nav-btn ${activeSection === s ? 'active' : ''}`} onClick={() => scrollToSection(s)}>{s}</button>
+              <button key={s} className={`nav-btn ${activeSection === s ? 'active' : ''}`} onClick={() => scrollToSection(s)}
+              >{translations[language].nav[s as keyof typeof translations['es']['nav']]}</button>
             ))}
             <div style={{ display: 'flex', gap: 8, marginLeft: 20 }}>
   <button onClick={() => setLanguage('es')} className="lang-btn">ES</button>
