@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Download, Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Download, Mail, Phone, MapPin, Send, Globe } from 'lucide-react';
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function App() {
@@ -287,10 +287,26 @@ export default function App() {
               onClick={changeLanguage}
               className="lang-btn lang-toggle"
               title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
-              style={{ marginLeft: 16, display: 'flex', alignItems: 'center', gap: 6, minWidth: 64 }}
+              style={{
+                marginLeft: 16,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '6px 12px',
+                borderRadius: 12,
+                background: '#ede9fe',
+                border: '1px solid #c4b5fd55',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                fontWeight: 600
+              }}
             >
-              <span style={{ fontSize: 15, lineHeight: 1 }}>🌐</span>
-              <span className={`lang-label ${isChanging ? 'lang-out' : 'lang-in'}`}>
+              <Globe size={16} style={{ color: '#7c3aed' }} />
+
+              <span
+                className={`lang-label ${isChanging ? 'lang-out' : 'lang-in'}`}
+                style={{ fontSize: 13 }}
+              >
                 {language === 'es' ? 'EN' : 'ES'}
               </span>
             </button>
