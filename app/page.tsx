@@ -88,7 +88,7 @@ export default function App() {
   }, []);
  
   useEffect(() => {
-    const elements = document.querySelectorAll('.reveal, .reveal-exp, .timeline-line');
+    const elements = document.querySelectorAll('.reveal, .reveal-exp');
   
     const observer = new IntersectionObserver(
       (entries, obs) => {
@@ -96,39 +96,30 @@ export default function App() {
           if (entry.isIntersecting) {
             const el = entry.target as HTMLElement;
   
-            // ─────────────────────────────
-            // ✨ ANIMACIÓN BASE (reveal normal)
-            // ─────────────────────────────
-            el.classList.add('active');
-  
-            // ─────────────────────────────
-            // ⚡ EXPERIENCIA: efecto escalonado
-            // ─────────────────────────────
+            // 🔥 delay SOLO para experiencia
             if (el.classList.contains('reveal-exp')) {
-              const index = Array.from(elements).indexOf(entry.target);
+              const cards = el.parentElement?.querySelectorAll('.reveal-exp');
+              const index = Array.from(cards || []).indexOf(el);
+  
               el.style.transitionDelay = `${index * 120}ms`;
             }
   
-            // 🌊 TIMELINE ANIMATION
-
-            if (el.classList.contains('timeline-line')) {
-              el.classList.add('active');
-            }
+            // ✨ activar animación
+            el.classList.add('active');
   
             obs.unobserve(el);
           }
         });
       },
       {
-        threshold: 0.1, rootMargin: "0px 0px -120px 0px"
+        threshold: 0.15,
+        rootMargin: "0px 0px -40px 0px"
       }
     );
   
     elements.forEach((el) => observer.observe(el));
   
-  
-    //  SHIMMER ABOUT IMAGE
-
+    // ───────── SHIMMER (lo dejamos igual)
     const imgWrap = document.querySelector('.about-img-wrap');
   
     const shimmerObs = new IntersectionObserver(
@@ -138,8 +129,6 @@ export default function App() {
             const el = entry.target as HTMLElement;
   
             el.classList.add('shimmer-active');
-  
-            //    efecto 
             el.style.transform = "scale(1.02)";
   
             obs.unobserve(el);
@@ -150,9 +139,6 @@ export default function App() {
     );
   
     if (imgWrap) shimmerObs.observe(imgWrap);
-  
-  
-    //  CLEANUP
   
     return () => {
       observer.disconnect();
