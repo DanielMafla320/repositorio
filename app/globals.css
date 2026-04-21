@@ -501,20 +501,49 @@
           animation: expGlow 0.8s ease;
         }
 
-        .lang-btn {
-          padding: 6px 12px;
-          border-radius: 8px;
-          border: 1px solid #ddd;
-          background: white;
-          cursor: pointer;
-          font-weight: 600;
-          transition: 0.2s;
-        }
-        
-        .lang-btn:hover {
-          background: #7c3aed;
-          color: white;
-        }
-        
+/* ── LANG TOGGLE BUTTON ── */
+.lang-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── FADE para textos al cambiar idioma ── */
+.lang-label {
+  display: inline-block;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.lang-out {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
+
+.lang-in {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+/* fade-t: para elementos pequeños (pills, botones, labels) */
+.fade-t {
+  display: inline-block;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* fade-text ya lo tienes, pero si no está agrega: */
+.fade-text {
+  animation: fadeSlideIn 0.35s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
           
 
