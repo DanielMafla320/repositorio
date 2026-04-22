@@ -247,7 +247,7 @@ export default function App() {
     const centerY = rect.height / 2;
     const rotateX = -(y - centerY) / 35;
     const rotateY =  (x - centerX) / 35;
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
     card.classList.add('hovering');
   };
 
@@ -560,9 +560,8 @@ export default function App() {
 
                 {/* bloque inferior: autor — clase testi-author para que el CSS lo pegue al fondo */}
                 <div className="testi-author" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{ width: 42, height: 42, borderRadius: '50%', overflow: 'hidden', border: `2px solid ${darkMode ? '#4a4a80' : '#c4b5fd66'}`, flexShrink: 0 }}>
-                    <img src={testi.avatar} alt={testi.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </div>
+                  
+                  
                   <div>
                     <div style={{ fontSize: 14, fontWeight: 700, color: c.text, transition: T }}>{testi.name}</div>
                     <div key={language + 'tr' + i} className={`fade-t ${isChanging ? 'lang-out' : 'lang-in'}`} style={{ fontSize: 12, fontWeight: 600, color: '#7c3aed' }}>{testi.role}</div>
