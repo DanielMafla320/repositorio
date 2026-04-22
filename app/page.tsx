@@ -36,7 +36,7 @@ export default function App() {
     setTimeout(() => setDownloading(false), 600);
   };
  
-  // ── Envío del formulario ──────────────────────────────────────────────────
+  //  Envío del formulario 
   const handleSend = async () => {
     if (!formName.trim() || !formEmail.trim() || !formMessage.trim()) return;
     setSendStatus('sending');
@@ -57,7 +57,7 @@ export default function App() {
       setTimeout(() => setSendStatus('idle'), 4000);
     }
   };
-  // ─────────────────────────────────────────────────────────────────────────
+  
  
   const c = darkMode ? {
     bg: '#0b0b16', bgAlt: '#0b0b16', surface: '#13131f',
@@ -212,12 +212,30 @@ export default function App() {
   const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
-    const rotateX = -(e.clientY - rect.top - rect.height / 2) / 12;
-    const rotateY = (e.clientX - rect.left - rect.width / 2) / 12;
+  
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+  
+    card.style.setProperty('--x', `${x}px`);
+    card.style.setProperty('--y', `${y}px`);
+  
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+  
+    const rotateX = -(y - centerY) / 12;
+    const rotateY = (x - centerX) / 12;
+  
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
   };
   const resetTilt = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+    const card = e.currentTarget;
+  
+    // Reset del tilt
+    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+  
+    // 🔥 Reset del brillo (IMPORTANTE)
+    card.style.setProperty('--x', '50%');
+    card.style.setProperty('--y', '50%');
   };
  
   useEffect(() => {
