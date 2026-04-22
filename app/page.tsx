@@ -121,9 +121,24 @@ export default function App() {
       testiPill: '✦ Testimonios', testiTitle: 'Lo que ', testiTitleGrad: 'dicen',
       testiDesc: 'Lo que dicen mis compañeros y colaboradores',
       testimonials: [
-        { text: 'Daniel es un desarrollador muy dedicado. Su capacidad para aprender rápido y aplicar lo aprendido en proyectos reales lo hace un colaborador valioso en cualquier equipo.', name: 'Ana Martínez', role: 'Profesora de Ingeniería de Software', avatar: 'https://images.unsplash.com/photo-1581065178047-8ee15951ede6?w=100&q=80' },
-        { text: 'Trabajar con Daniel fue una experiencia muy positiva. Su entusiasmo por la tecnología y su compromiso con cada tarea hacen que los proyectos siempre salgan adelante.', name: 'Carlos Ruiz', role: 'Compañero de proyecto universitario', avatar: 'https://images.unsplash.com/photo-1723537742563-15c3d351dbf2?w=100&q=80' },
-        { text: 'Daniel tiene una gran curiosidad intelectual y siempre está buscando nuevas formas de mejorar. Es el tipo de estudiante que marca la diferencia en un equipo.', name: 'Laura Fernández', role: 'Mentora de desarrollo web', avatar: 'https://images.unsplash.com/photo-1610387694365-19fafcc86d86?w=100&q=80' },
+        {
+          text: 'Daniel tiene una forma muy clara de explicar conceptos complejos. Siempre está dispuesto a ayudar y se nota mucho su interés por el aprendizaje continuo.',
+          name: 'Adrian Figueroa',
+          role: 'Estudiante de Ing. Electrónica',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80',
+        },
+        {
+          text: 'He trabajado con Daniel en varios proyectos universitarios y siempre sorprende con sus diseños en Figma. Tiene buen ojo para la interfaz y se esfuerza mucho por hacer las cosas bien desde el principio.',
+          name: 'Juan Ortega',
+          role: 'Estudiante de Ing. de Sistemas',
+          avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80',
+        },
+        {
+          text: 'Daniel es de esas personas que llega preparada a cada clase y cuando hay que resolver un problema en equipo siempre propone ideas concretas. Su disciplina para estudiar se nota en los resultados.',
+          name: 'Daniel Camilo Hernández',
+          role: 'Estudiante de Ing. de Sistemas',
+          avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&q=80',
+        },
       ],
       expPill: '✦ Trayectoria', expTitle: 'Experiencia ', expTitleGrad: 'académica',
       expDesc: 'Mi trayectoria profesional y formación académica',
@@ -171,9 +186,24 @@ export default function App() {
       testiPill: '✦ Testimonials', testiTitle: 'What they ', testiTitleGrad: 'say',
       testiDesc: 'What my peers and collaborators say',
       testimonials: [
-        { text: 'Daniel is a very dedicated developer. His ability to learn quickly and apply what he has learned to real projects makes him a valuable collaborator on any team.', name: 'Ana Martínez', role: 'Software Engineering Professor', avatar: 'https://images.unsplash.com/photo-1581065178047-8ee15951ede6?w=100&q=80' },
-        { text: 'Working with Daniel was a very positive experience. His enthusiasm for technology and his commitment to every task means projects always move forward.', name: 'Carlos Ruiz', role: 'University project teammate', avatar: 'https://images.unsplash.com/photo-1723537742563-15c3d351dbf2?w=100&q=80' },
-        { text: 'Daniel has great intellectual curiosity and is always looking for new ways to improve. He is the kind of student who makes a difference on a team.', name: 'Laura Fernández', role: 'Web development mentor', avatar: 'https://images.unsplash.com/photo-1610387694365-19fafcc86d86?w=100&q=80' },
+        {
+          text: 'Daniel has a very clear way of explaining complex concepts. He is always willing to help and his interest in continuous learning is very evident.',
+          name: 'Adrian Figueroa',
+          role: 'Electronics Engineering Student',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80',
+        },
+        {
+          text: "I've worked with Daniel on several university projects and he always impresses with his Figma designs. He has a good eye for interfaces and puts real effort into getting things right from the start.",
+          name: 'Juan Ortega',
+          role: 'Systems Engineering Student',
+          avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80',
+        },
+        {
+          text: 'Daniel is one of those people who comes prepared to every class. When there is a problem to solve as a team, he always brings concrete ideas. His dedication to studying clearly shows in his results.',
+          name: 'Daniel Camilo Hernández',
+          role: 'Systems Engineering Student',
+          avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&q=80',
+        },
       ],
       expPill: '✦ Journey', expTitle: 'Academic ', expTitleGrad: 'experience',
       expDesc: 'My professional journey and academic background',
@@ -513,7 +543,7 @@ export default function App() {
                   transition: 'box-shadow 0.35s ease, border-color 0.35s ease',
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'flex-start',  // ← CORRECCIÓN: contenido desde arriba
+                  justifyContent: 'flex-start',
                   height: '100%',
                   boxSizing: 'border-box',
                 }}
@@ -528,8 +558,8 @@ export default function App() {
                   <p key={language + 'tm' + i} className="fade-text" style={{ fontSize: 14, lineHeight: 1.8, color: c.textSoft, transition: T }}>"{testi.text}"</p>
                 </div>
 
-                {/* bloque inferior: autor — marginTop: 'auto' lo empuja al fondo solo cuando hay espacio extra */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 'auto', paddingTop: 22 }}>
+                {/* bloque inferior: autor — clase testi-author para que el CSS lo pegue al fondo */}
+                <div className="testi-author" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <div style={{ width: 42, height: 42, borderRadius: '50%', overflow: 'hidden', border: `2px solid ${darkMode ? '#4a4a80' : '#c4b5fd66'}`, flexShrink: 0 }}>
                     <img src={testi.avatar} alt={testi.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
