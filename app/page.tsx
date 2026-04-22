@@ -379,10 +379,14 @@ export default function App() {
               {text}<span className="cursor">|</span>
             </h2>
             <p key={language} className="fade-text" style={{ fontSize: 15, lineHeight: 1.85, color: c.textSoft, marginBottom: 36, maxWidth: 460, transition: T }}>{t.heroDesc}</p>
-            <button className="btn-primary">
-              <Download size={18} />
-              <span className={`fade-t ${isChanging ? 'lang-out' : 'lang-in'}`}>{t.downloadCV}</span>
-            </button>
+            <a href="/cv.pdf" download>
+              <button className="btn-primary">
+                <Download size={18} />
+                <span className={`fade-t ${isChanging ? 'lang-out' : 'lang-in'}`}>
+                  {t.downloadCV}
+                </span>
+              </button>
+            </a>
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ position: 'relative' }}>
