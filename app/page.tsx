@@ -26,6 +26,8 @@ export default function App() {
   const [formMessage, setFormMessage] = useState('');
   const [sendStatus, setSendStatus]   = useState<SendStatus>('idle');
   const formRef = useRef<HTMLDivElement>(null);
+  const [showNav, setShowNav] = useState(true);
+  const lastScrollY = useRef(0);
  
   const toggleDark = () => setDarkMode(prev => !prev);
  
@@ -258,6 +260,28 @@ export default function App() {
   };
  
   useEffect(() => {
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+  
+      if (currentScroll > lastScrollY.current && currentScroll > 80) {
+        // bajando 👇
+        setShowNav(false);
+      } else {
+        // subiendo 👆
+        setShowNav(true);
+      }
+  
+      lastScrollY.current = currentScroll;
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+
+
+  useEffect(() => {
     const words = ["Software Engineering Student", "Frontend Developer", "Backend Developer", "Problem Solver"];
     let wordIndex = 0, charIndex = 0, isDeleting = false;
     const type = () => {
@@ -380,7 +404,22 @@ export default function App() {
       `}</style>
  
       {/* NAVBAR */}
-      <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: c.navBg, backdropFilter: 'blur(20px)', borderBottom: `1px solid ${c.border}`, boxShadow: darkMode ? '0 1px 20px #00000040' : '0 1px 20px #7c3aed08', transition: T }}>
+      <nav style={{
+    position: 'fixed', // 👈 importante
+    top: 0,
+    left: 0,
+    width: '100%',
+    zIndex: 50,
+    transform: showNav ? 'translateY(0)' : 'translateY(-100%)',
+    transition: 'transform 0.35s ease',
+    background: c.navBg,
+    backdropFilter: 'blur(20px)',
+    borderBottom: `1px solid ${c.border}`,
+    boxShadow: darkMode
+      ? '0 1px 20px #00000040'
+      : '0 1px 20px #7c3aed08',
+  
+  }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 64 }}>
           <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 22, fontWeight: 800 }}>
             <span style={{ color: c.text, transition: T }}>Daniel </span><span className="grad">Mafla</span>
