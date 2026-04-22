@@ -10,8 +10,17 @@ export default function App() {
   const [language, setLanguage] = useState<'es' | 'en'>('es');
   const [isChanging, setIsChanging] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   const toggleDark = () => setDarkMode(prev => !prev);
+
+  const handleDownload = () => {
+    setDownloading(true);
+  
+    setTimeout(() => {
+      setDownloading(false);
+    }, 600);
+  };
 
   // ── COLOR TOKENS ──
   const c = darkMode ? {
@@ -379,14 +388,15 @@ export default function App() {
               {text}<span className="cursor">|</span>
             </h2>
             <p key={language} className="fade-text" style={{ fontSize: 15, lineHeight: 1.85, color: c.textSoft, marginBottom: 36, maxWidth: 460, transition: T }}>{t.heroDesc}</p>
-            <a href="/cv.pdf" download>
-              <button className="btn-primary">
-                <Download size={18} />
-                <span className={`fade-t ${isChanging ? 'lang-out' : 'lang-in'}`}>
-                  {t.downloadCV}
-                </span>
-              </button>
-            </a>
+            <a href="/cv.pdf" download onClick={handleDownload}>
+            <button className={`btn-primary ${downloading ? 'download-anim' : ''}`}>
+              <Download size={18} />
+              <span className={`fade-t ${isChanging ? 'lang-out' : 'lang-in'}`}>
+                {t.downloadCV}
+              </span>
+            </button>
+          </a>
+
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ position: 'relative' }}>
