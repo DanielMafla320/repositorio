@@ -57,28 +57,46 @@ export default function Testimonials() {
               onMouseMove={handleTilt}
               onMouseLeave={resetTilt}
               style={{
-                borderRadius: 20, padding: 28,
-                position: 'relative', overflow: 'hidden',
-                background: cardBg, border: `1.5px solid ${cardBorder}`,
-                transition: 'box-shadow 0.35s ease, border-color 0.35s ease',
-                display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
-                height: '100%', boxSizing: 'border-box',
-              }}
-            >
-              <div className="testi-quote" style={{ color: darkMode ? '#2a2a45' : undefined }}>"</div>
+                    borderRadius: 20,
+                    padding: 28,
+                    position: 'relative',
+                    background: cardBg,
+                    border: `1.5px solid ${cardBorder}`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 14,
+                    minHeight: 280,
+                    boxSizing: 'border-box',
+                    overflow: 'hidden'
+                                }}
+                                >
+                    <div className="testi-quote" style={{     position: 'absolute',
+                        top: 8,
+                        left: 16,
+                        fontSize: 60,
+                        opacity: 0.08,
+                        pointerEvents: 'none' }}>
+                    "
+                    </div>
 
-              <div>
-                <div style={{ display: 'flex', gap: 3, marginBottom: 16 }}>
-                  {[...Array(5)].map((_, j) => (
-                    <span key={j} style={{ color: '#a855f7', fontSize: 14 }}>★</span>
-                  ))}
-                </div>
-                <p key={language + 'tm' + i} className="fade-text" style={{ fontSize: 14, lineHeight: 1.8, color: c.textSoft, transition: T }}>
-                  "{testi.text}"
-                </p>
-              </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
+                    <div style={{ display: 'flex', gap: 10 }}>
+                        {[...Array(5)].map((_, j) => (
+                        <span key={j} style={{ color: '#a855f7', fontSize: 14 }}>★</span>
+                        ))}
+                    </div>
 
-              <div className="testi-author" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <p style={{ fontSize: 14, lineHeight: 1.6, color: c.textSoft }}>
+                        "{testi.text}"
+                    </p>
+                    </div>
+
+                    <div className="testi-author" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 12,
+                    marginTop: 'auto'
+                    }}>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 700, color: c.text, transition: T }}>{testi.name}</div>
                   <div
