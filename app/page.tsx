@@ -1,4 +1,3 @@
-
 "use client";
  
 import { useState, useEffect, useRef } from 'react';
@@ -7,9 +6,9 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import emailjs from '@emailjs/browser';
  
 
-const EMAILJS_SERVICE_ID  = 'service_sbytjxj';   // ej: 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'template_ulhhlwb';  // ej: 'template_xyz789'
-const EMAILJS_PUBLIC_KEY  = '4o1gDlG0O3pRDalfm';   // ej: 'xxxxxxxxxxxxxxxxxxx'
+const EMAILJS_SERVICE_ID  = 'service_sbytjxj';
+const EMAILJS_TEMPLATE_ID = 'template_ulhhlwb';
+const EMAILJS_PUBLIC_KEY  = '4o1gDlG0O3pRDalfm';
 
  
 type SendStatus = 'idle' | 'sending' | 'success' | 'error';
@@ -22,7 +21,6 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [downloading, setDownloading] = useState(false);
  
-  // Estados del formulario
   const [formName, setFormName]       = useState('');
   const [formEmail, setFormEmail]     = useState('');
   const [formMessage, setFormMessage] = useState('');
@@ -36,7 +34,6 @@ export default function App() {
     setTimeout(() => setDownloading(false), 600);
   };
  
-  //  Envío del formulario 
   const handleSend = async () => {
     if (!formName.trim() || !formEmail.trim() || !formMessage.trim()) return;
     setSendStatus('sending');
@@ -209,34 +206,45 @@ export default function App() {
  
   const t = translations[language];
  
+  // ── TILT HANDLER CORREGIDO ────────────────────────────────────────────────
+  // Actualiza --x y --y para el gradiente radial del brillo,
+  // añade la clase "hovering" para mostrar el ::before,
+  // y aplica el tilt 3D inline.
   const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
-  
+
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-  
+
+    // Posición del cursor para el gradiente radial del brillo
     card.style.setProperty('--x', `${x}px`);
     card.style.setProperty('--y', `${y}px`);
-  
-    const centerX = rect.width / 2;
+
+    // Tilt 3D
+    const centerX = rect.width  / 2;
     const centerY = rect.height / 2;
-  
     const rotateX = -(y - centerY) / 12;
-    const rotateY = (x - centerX) / 12;
-  
+    const rotateY =  (x - centerX) / 12;
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+
+    // Activa el brillo
+    card.classList.add('hovering');
   };
+
+  // ── RESET HANDLER CORREGIDO ───────────────────────────────────────────────
+  // Quita el tilt, elimina la clase "hovering" para que el ::before
+  // haga fade-out suave a opacity:0 via la transition definida en CSS.
   const resetTilt = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
-  
-    // Reset del tilt
+
+    // Reset del tilt 3D
     card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
-  
-    // 🔥 Reset del brillo (IMPORTANTE)
-    card.style.setProperty('--x', '50%');
-    card.style.setProperty('--y', '50%');
+
+    // Quita la clase que muestra el brillo → el CSS hace el fade-out automáticamente
+    card.classList.remove('hovering');
   };
+  // ─────────────────────────────────────────────────────────────────────────
  
   useEffect(() => {
     const words = ["Software Engineering Student", "Frontend Developer", "Backend Developer", "Problem Solver"];
@@ -327,7 +335,6 @@ export default function App() {
     minHeight: '100vh', color: c.text, transition: T, overflowX: 'hidden',
   };
  
-  // ── Botón de envío con estados ────────────────────────────────────────────
   const sendBtnContent = () => {
     if (sendStatus === 'sending') return <><Loader size={17} style={{ animation: 'spin 1s linear infinite' }} /><span>{t.sendingText}</span></>;
     if (sendStatus === 'success') return <><CheckCircle size={17} /><span>{t.successText}</span></>;
@@ -341,7 +348,6 @@ export default function App() {
     'linear-gradient(135deg, #7c3aed, #a855f7)';
  
   const isFormEmpty = !formName.trim() || !formEmail.trim() || !formMessage.trim();
-  // ─────────────────────────────────────────────────────────────────────────
  
   return (
     <div style={pageBg}>
@@ -510,8 +516,24 @@ export default function App() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 22 }}>
             {t.testimonials.map((testi, i) => (
-              <div key={i} className={`testimonial-card glass reveal reveal-d${i + 1}`} onMouseMove={handleTilt} onMouseLeave={resetTilt}
-                style={{ borderRadius: 20, padding: 28, position: 'relative', overflow: 'hidden', background: cardBg, border: `1.5px solid ${cardBorder}`, transition: T }}>
+              <div
+                key={i}
+                // ↓ Se quitó la clase "hovering" del className estático;
+                //   ahora la añade/quita handleTilt y resetTilt dinámicamente.
+                className={`testimonial-card glass reveal reveal-d${i + 1}`}
+                onMouseMove={handleTilt}
+                onMouseLeave={resetTilt}
+                style={{
+                  borderRadius: 20,
+                  padding: 28,
+                  position: 'relative',
+                  overflow: 'hidden',
+                  background: cardBg,
+                  border: `1.5px solid ${cardBorder}`,
+                  // Sin "transition: transform" aquí para no interferir con el tilt inline
+                  transition: 'box-shadow 0.35s ease, border-color 0.35s ease',
+                }}
+              >
                 <div className="testi-quote" style={{ color: darkMode ? '#2a2a45' : undefined }}>"</div>
                 <div style={{ display: 'flex', gap: 3, marginBottom: 16 }}>
                   {[...Array(5)].map((_, j) => <span key={j} style={{ color: '#a855f7', fontSize: 14 }}>★</span>)}
@@ -575,10 +597,8 @@ export default function App() {
  
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 28 }}>
  
-            {/* ── FORMULARIO FUNCIONAL CON EMAILJS ── */}
             <div ref={formRef} className="reveal reveal-d1" style={{ ...cardStyle, padding: 36, position: 'relative', overflow: 'hidden' }}>
  
-              {/* Overlay éxito */}
               {sendStatus === 'success' && (
                 <div style={{ position: 'absolute', inset: 0, zIndex: 10, borderRadius: 22, background: darkMode ? 'rgba(11,11,22,0.97)' : 'rgba(255,255,255,0.97)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, animation: 'fadeInUp 0.4s ease' }}>
                   <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'linear-gradient(135deg, #16a34a, #22c55e)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 32px #22c55e55' }}>
@@ -589,7 +609,6 @@ export default function App() {
                 </div>
               )}
  
-              {/* Overlay error */}
               {sendStatus === 'error' && (
                 <div style={{ position: 'absolute', inset: 0, zIndex: 10, borderRadius: 22, background: darkMode ? 'rgba(11,11,22,0.97)' : 'rgba(255,255,255,0.97)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, animation: 'fadeInUp 0.4s ease' }}>
                   <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'linear-gradient(135deg, #dc2626, #ef4444)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 32px #ef444455' }}>
@@ -637,7 +656,6 @@ export default function App() {
               </button>
             </div>
  
-            {/* ── INFO DE CONTACTO ── */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
               <div className="reveal reveal-d2" style={{ ...cardStyle, padding: 28 }}>
                 <h3 style={{ fontSize: 20, fontWeight: 700, color: c.text, marginBottom: 6, transition: T }}>
